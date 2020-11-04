@@ -300,8 +300,14 @@ def show_results(best_img, content_path, style_path, show_large_final=True):
   style = load_img(style_path)
 
   if show_large_final:
+    os.chdir('images/output_images')
     plt.figure(figsize=(10, 10))
     plt.axis('off')
     plt.imshow(best_img)
-    plt.savefig('output-image-3.jpg', bbox_inches='tight', pad_inches=0)
-    
+    file_name = 'output_image_0'
+    if file_name+'.jpg' in os.listdir():
+        file_name = 'output_image_'
+        last_file = sorted(os.listdir())[-1].split(".")[0].split("_")
+        num = int(last_file[-1]) + 1
+        file_name += str(num)
+    plt.savefig(file_name + '.jpg', bbox_inches='tight', pad_inches=0)
